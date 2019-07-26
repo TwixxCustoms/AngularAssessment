@@ -9,8 +9,7 @@
 		disableDefaultUI: false,
 		//scrollwheel: false,
 		minZoom:10,
-		//maxzoom
-		//mapTypeId: google.map.MapTypeId.ROADMAP
+
 		zoomControlOptions :{
 			position: google.maps.ControlPosition.LEFT_BOTTOM,
 		},

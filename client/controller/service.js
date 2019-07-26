@@ -1,5 +1,3 @@
-//this service gets the data from the server, filters the data into 10 random arrays and sends back to controller
-
 app.service('filterdata', function(){
 
 	this.filter = function(data){

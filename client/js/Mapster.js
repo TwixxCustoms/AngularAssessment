@@ -5,7 +5,7 @@
 
 (function(window, google){
 
-	//this Mapster variable stores a function NOT an object
+
 	var Mapster = (function(){
 		function Mapster(element, opts){
 			this.gMap = new google.maps.Map(element, opts);
@@ -21,7 +21,6 @@
 				}
 			},
 
-			//creating a reusable function in your own class
 			_on: function(opts){
 				var self = this;
 
@@ -30,7 +29,7 @@
 				})
 			},
 
-			//this method calls the create marker method
+	
 			addMarker: function(opts) {
 				var marker;
 
@@ -68,7 +67,7 @@
 
 			return marker;
 
-			}, //addMarker method
+			},
 
 			_addMarker: function(marker){
 				this.markers.push(marker);
@@ -77,16 +76,16 @@
 
 			_createMarker: function(opts){
 				opts.map = this.gMap
-				//console.log(new google.maps.Marker(opts));
+		
 				return new google.maps.Marker(opts);
 
-			}, // end of createMarker function
+			}, 
 
 
 
-			//Function for reset button: This function will clear all markers
+		
 			clear : function(){
-				 //	setMapOnAll(null);
+				 
         	for (var i = 0; i < this.markers.length; i++ ) {
 				    this.markers[i].setMap(null);
 				  }
@@ -95,7 +94,7 @@
 			},
 
 
-			//creating service.
+	
 			_onService: function(opts){
 
 
@@ -142,7 +141,7 @@
 					        avoidTolls: true
 					    },	callback );
 
-					function callback(response, status) {  //function to be called once distance is calculated
+					function callback(response, status) { 
 
 				    if(status=="OK") {
 
@@ -164,12 +163,12 @@
 				}
 
 
-			} // end of _onService
+			} 
 
 
 
 
-		}; //end of prototype method
+		}; 
 		return Mapster;
 	}());
 

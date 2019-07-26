@@ -1,11 +1,9 @@
-// This is the main Controller.
-
 app.controller('AppCtrl',function($scope, $http, filterdata) {
 
-  $scope.searchButtonText = "Find a place to eat!";
+  $scope.searchButtonText = "Find somewhere nearby";
   $scope.searchClicked=0;
 
-  // ----> Code from autocomplete.js <------
+
   var inputFrom = document.getElementById('input');
 
 
@@ -21,27 +19,24 @@ app.controller('AppCtrl',function($scope, $http, filterdata) {
     console.log('place', $scope.place);
 
 
-  }); //end of autocomplete function.
-
-
-  //Funtion for the search button
-  // This function will recieve data from the server, filter the data , and respond back to the DOM
+  }); 
+  
   $scope.search = function(counter) {
     $scope.searchClicked = $scope.searchClicked + counter;
     if($scope.searchClicked == 1){
 
-    //call the geocode function
+  
     $scope.geocode($scope.place);
 
     } else{
 
-      //Call the Next Function.
+  
       $scope.next();
     }
 
   };
 
-      //<-----------This is the function for the next button-------->
+
   $scope.next = function(){
 
 
@@ -51,7 +46,7 @@ app.controller('AppCtrl',function($scope, $http, filterdata) {
     var restaurant = $scope.filterdata;
     if(restaurant.length <= 1){
       $scope.alertShow = true;
-      $scope.alert_msg = "We ran out of 10 restaurant. Enter a different location?"
+      $scope.alert_msg = "We ran out of 10 restaurants. Enter a different location?"
       $scope.reset();
     }
 
@@ -61,7 +56,7 @@ app.controller('AppCtrl',function($scope, $http, filterdata) {
 
       restaurant = $scope.filterdata;
 
-      //call the getDetails method
+   
       $scope.getDetails();
 
       var server = {location: $scope.place, restaurant: restaurant[0].name};
@@ -73,16 +68,11 @@ app.controller('AppCtrl',function($scope, $http, filterdata) {
 
           var restaurant = response.businesses;
 
-         //Storing all relevent data
+
           var name            = restaurant[0].name
           localStorage.setItem('restaurantName', name);
 
-        /*
-
-          -The order of scope variables is coded according to what is
-          - displayed in the website
-
-        */
+ 
 
         var rating_url      =  restaurant[0].location.rating_img_url;
         $scope.rating_img   = restaurant[0].rating_img_url;
@@ -121,13 +111,11 @@ app.controller('AppCtrl',function($scope, $http, filterdata) {
 
     });
 
-    } //end of main else
+    } 
 
 
-  } //end of next
+  } 
 
-
-  //this geocode function  with find a nearby restaurant.
   $scope.geocode = function(placeName){
 
 
@@ -148,9 +136,9 @@ app.controller('AppCtrl',function($scope, $http, filterdata) {
 
               var request = {
                 location: location,
-               // placeId: restaurant.place_id,
+              
                 type: ['restaurant'],
-                radius: '10000' //in meters
+                radius: '10000'
               };
 
               service.nearbySearch(
@@ -159,33 +147,29 @@ app.controller('AppCtrl',function($scope, $http, filterdata) {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
 
 
-                  //filterdata will call service.js
-                  $scope.filterdata = filterdata.filter(place);   //filterdata is an array of buisnesses.
+               
+                  $scope.filterdata = filterdata.filter(place);   
 
 
-                  //call the getdetail method.
+       
                   $scope.getDetails();
 
 
             }
           })
 
-        } //end of main IF
+        }
 
         else{
           $scope.alertShow = true;
-          $scope.alert_msg = "We cannot find a nearby restaurant from this location"
+          $scope.alert_msg = "No nearby restaurants found"
 
         }
 
       });
 
-  } //end of geocode function
+  } 
 
-
-
-  //this method will get the restaurant reviews and photos.
-  //This function will get called after search function
   $scope.getDetails = function(){
 
     var service = new google.maps.places.PlacesService(map.gMap);
@@ -201,7 +185,7 @@ app.controller('AppCtrl',function($scope, $http, filterdata) {
 
           $scope.restaurantName = result.name;
           $scope.callServer();
-          //display website
+          
           $scope.website        =  result.website;
 
 
@@ -217,7 +201,7 @@ app.controller('AppCtrl',function($scope, $http, filterdata) {
             var photos = result.photos[i].getUrl({'maxWidth': 600, 'maxHeight': 600});
 
            $scope.listOfPhotos.push(photos);
-           //$scope.test = $scope.photos
+         
 
           }
         }
@@ -226,9 +210,9 @@ app.controller('AppCtrl',function($scope, $http, filterdata) {
           $scope.noPhotoText = "No photos to display"
         }
 
-        $scope.searchButtonText = "Not this One. Next!!!"
+        $scope.searchButtonText = "Find another restaurant"
 
-        } //end of service if
+        }
 
         else{
           $scope.alertShow = true;
@@ -239,12 +223,11 @@ app.controller('AppCtrl',function($scope, $http, filterdata) {
       })
 
 
-  } //end of getDetail function.
+  } 
 
 
 
 
-//  <-------Function for reset button ----->
 
 $scope.reset = function(){
 
@@ -264,7 +247,7 @@ $scope.reset = function(){
     $scope.reviews        = "";
     $scope.listOfPhotos   = "";
 
-    $scope.searchButtonText = "Find a place to eat!";
+    $scope.searchButtonText = "find somewhere nearby";
 
     document.getElementById("modify").innerHTML = "";
 
@@ -282,7 +265,7 @@ $scope.reset = function(){
 
 
 
-  //This method will call yelp api and retrieve relevant data about the restaurant
+
   $scope.callServer = function(){
      var server = {location: $scope.place, restaurant: $scope.restaurantName};
 

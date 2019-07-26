@@ -8,29 +8,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-//Request API access: http://www.yelp.com/developers/getting_started/api_access
+
 const yelp = require('yelp-fusion');
-const client = yelp.client('v46A4XkKVRP2htkTOxZyjw2iQw_NqRe2tFUoEzqMf2drN0wFcMrY0y5lR9Qm7Co5ie1WkVuimnAbBOc0pSZRb2u1LE68H79dPs1kn1MDC2eBnFUP0l4ZLl055PGOW3Yx');
-
-//use your yelp credentials
-// var yelp = new Yelp({
-//   consumer_key: 'WfydRv01aFXZWK6TaAJOnQ',
-//   consumer_secret: 'oh9wyIny60Vc_edK4MBjCDHL0Bs',
-//   token: 'n7GVnnmsVoXxjoRdP9fxeDpmJ17DqzVk',
-//   token_secret: 'Y_ZibdstQn15p5eTjequFnFEo_A',
-// });
+const client = yelp.client('OhsHgXSJubo2tUxQYlJt-tVWTvrjR1sCbvd6lVM0HeOEWrsa-heZ93vXY7k1-5PfMznVAqI926HoCafcCQvdkh65weMco177Xm_1MLKKdaJts8nL_5CDi9eLE1M6XXYx');
 
 
-//Posting data
+
+
+
 app.post('/getyelp', function(req, res){
 
 	var searchRestaurant		= req.body.restaurant;
 	var yelpLocation 				= req.body.location;
 
-	// See http://www.yelp.com/developers/documentation/v2/search_api
+
 	client.search({ location: yelpLocation, term: searchRestaurant})
 	.then(function (data) {
-		res.json(data.jsonBody.businesses); // I will return all the data recieved from YELP API. I will filter the data in controller.js
+		res.json(data.jsonBody.businesses);
 
 	})
 	.catch(function (err) {

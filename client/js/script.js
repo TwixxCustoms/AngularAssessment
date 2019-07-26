@@ -1,24 +1,22 @@
 (function(window, mapster){
 
-		//map options
+
 	var options = mapster.MAP_OPTIONS;
 
 	element = document.getElementById('map-canvas');
 
-	//map
+
 	//	map = new google.maps.Map(element, options);
 	map = mapster.create(element, options);
-	//map.zoom(18);
-	//alert(map.zoom());
-
+	
 	var geocoder = new google.maps.Geocoder();
 
-	//this variable will be the location of the user.
+	
 	var input = document.getElementById('input');
 
 
 
-// Added RESET button to reset google map.
+
 document.getElementById('reset').addEventListener('click', function(e){
 	map.clear();
 	map = mapster.create(element, options);
@@ -26,7 +24,7 @@ document.getElementById('reset').addEventListener('click', function(e){
 
 
 
-//Direction button
+
 
 button = document.getElementById('button');
 
@@ -74,13 +72,10 @@ button = document.getElementById('button');
 			console.error(status);
 		}
 	});
-}) //end of button event listener
+})
 
 
-//find = document.getElementById('find');
 
-
-//This Button will call function to display DIRECTION SERVICE.
 function find(result, restaurant){
 
 	var location = {
@@ -90,7 +85,7 @@ function find(result, restaurant){
 
 	var type;
 
-	//calls the on service method from Mapster.js to locate nearby restaurants.
+	
 	map._onService({
 		destination: restaurant,
 		location: location,
