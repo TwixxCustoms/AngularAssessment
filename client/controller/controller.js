@@ -1,19 +1,5 @@
 // This is the main Controller.
 
-/*
-
-  #Disclaimer  ----------- ^^
-
-This Project does not have proper folder structure
-
-The Aim of this project was to get familar with GOOGLE and YELP API
-
-Very Minimal Modular Programming is Used.
-
-
-*/
-
-
 app.controller('AppCtrl',function($scope, $http, filterdata) {
 
   $scope.searchButtonText = "Find a place to eat!";
@@ -262,13 +248,7 @@ app.controller('AppCtrl',function($scope, $http, filterdata) {
 
 $scope.reset = function(){
 
-  /*
 
-  -Set all scope varibles to null
-  -hide all components such as maps, results, ratings and photo slidehow
-
-
-  */
     $scope.link           = "";
     $scope.address        = "";
     $scope.name           = "";
@@ -313,12 +293,7 @@ $scope.reset = function(){
       var restaurant = response;
       var name = restaurant[0].name
 
-       //Storing all relevent data
-      /*
-          -The order of scope variables is coded according to what is
-          - displayed in the website
-
-        */
+ 
       $scope.displayWebsite = "Click to visit website";
       $scope.web            = "Website : "
 
@@ -329,6 +304,9 @@ $scope.reset = function(){
 
       $scope.name     =  name;
       $scope.display_name = name;
+
+      var price = restaurant[0].price;
+      $scope.price = "price : " + price + "/$$$$";
 
       var address         = restaurant[0].location.display_address;
       $scope.address = "Address : " + address;
